@@ -1,6 +1,5 @@
 library(readr)
 library(dplyr)
-library(fuzzyjoin)
 library(ggplot2)
 library(sf)
 
@@ -32,13 +31,6 @@ for (i in length(years):2){
 
 col.range=c(1,8)
 
-plot(pop_polygons['1971_1981_pct'], pal = colorRampPalette(c("red", "white", "blue")), limits = col.range)
-
 map <- ggplot() + geom_sf(data = pop_polygons, aes(fill = pct_1971_1981)) +
   scale_colour_steps()
 map
-#pop_polygons$'test' = BCPopulation[years[2]] - BCPopulation[years[2]]
-#years
-#pop_polygons$'test'
-
-#pop_polygons[years[2]]
