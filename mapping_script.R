@@ -18,19 +18,31 @@ st_crs(pop_polygons) # Test that data has projection
 
 for (i in length(years):2){
   for (j in (i-1):1){
-    diff_name = paste(years[j], "_", years[i], sep="")
+    diff_name = paste0(years[j], "_", years[i])
     print(diff_name)
-    pop_polygons[paste("change_", diff_name, sep = "")] = BCPopulation[years[i]] - BCPopulation[years[j]]
-    pop_polygons[paste("pct_", diff_name, sep = "")] = ((1 / BCPopulation[years[j]]) * BCPopulation[years[i]]) - 1
+    pop_polygons[paste0("change_", diff_name)] = BCPopulation[years[i]] - BCPopulation[years[j]]
+    pop_polygons[paste0("pct_", diff_name)] = ((1 / BCPopulation[years[j]]) * BCPopulation[years[i]]) - 1
   }
-  #diff_name = paste(years[n], "-", years[n-1], sep="")
-  #pop_polygons[diff_name] = BCPopulation[years[n]] - BCPopulation[years[n-1]]
-  #pop_polygons[paste(diff_name, "_pct", sep = "")] = ((1 / BCPopulation[years[n-1]]) * BCPopulation[years[n]]) - 1
-  #print(diff_name)
 }
 
 col.range=c(1,8)
 
-map <- ggplot() + geom_sf(data = pop_polygons, aes(fill = pct_1971_1981)) +
-  scale_colour_steps()
-map
+i = '1971'
+j = '1981'
+target_column = paste0("pct_", i, "_", j)
+map <- ggplot() + geom_sf(data = pop_polygons, aes(fill = get(target_column))) +
+  scale_fill_stepsn(colors = c("red", "white", "blue"),
+                   space = "Lab",
+                   na.value = "grey50",
+                   n.breaks = 3,
+                   limits = c(-0.4,.4),
+                   guide = "coloursteps",
+                   aesthetics = "fill")+ guides(fill=guide_legend(title=paste0("British Columbia\npop. change ", i, "-", j)))
+
+map + theme_void() + theme(legend.background = element_rect(linetype = 1, size = 0.25, colour = 1), 
+                           legend.margin = margin(.25, 0.25, 0.25, 0.25, unit='cm'),
+                           legend.box.margin = margin(-8, 0, 0, -5, unit='cm'),
+                           legend.title.align = 0.5)
+                           
+
+                           
