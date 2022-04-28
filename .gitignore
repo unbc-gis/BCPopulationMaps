@@ -2,3 +2,5 @@
 .Rhistory
 .RData
 .Ruserdata
+output/gradient/*
+output/classified/*
