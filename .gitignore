@@ -2,6 +2,5 @@
 .Rhistory
 .RData
 .Ruserdata
-output/gradient/*
-output/classified/*
+output/*
 BCPopulation1971-2021.csv
