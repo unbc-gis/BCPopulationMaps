@@ -56,7 +56,7 @@ for (i in length(years):2) {
                            legend.title.align = 0.5)
     
     #ggsave(plot = pct_map, width = 7, height = 6, dpi = 1200, filename = paste0(gradiant_out, ".jpg"))
-    ggsave(plot = pct_map, width = 7, height = 6, dpi = 1200, filename = paste0(gradiant_out, ".png"))
+    ggsave(plot = pct_map, width = 7, height = 6, dpi = 600, filename = paste0(gradiant_out, ".png"))
     
     colour_column = paste0("colour_", years[j], "_", years[i])
     classified_out = paste0("output/", colour_column)
@@ -72,6 +72,6 @@ for (i in length(years):2) {
     
     colour_map = colour_map + geom_sf(data = pop_polygons, colour = 'black', fill = NA, show.legend =  FALSE)
     #ggsave(plot = colour_map, width = 7, height = 6, dpi = 1200, filename = paste0(classified_out, ".jpg"))
-    ggsave(plot = colour_map, width = 7, height = 6, dpi = 1200, filename = paste0(classified_out, ".png"))
+    ggsave(plot = colour_map, width = 7, height = 6, dpi = 600, filename = paste0(classified_out, ".png"))
   }
 }
